@@ -22,19 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 스크롤 페이드인
-
 $(document).ready(function() {
     const sections = $('section');
     let currentSectionIndex = 0;
     let isScrolling = false;
 
-    const setActiveSection = (index) => {
+    // 클래스 추가
+    function setActiveSection(index){
         sections.removeClass('fade-in');
         $(sections[index]).addClass('fade-in');
-        if(index==1){
-            fadeInEvent();
-        }
-    };
+    }
 
     const scrollToSection = (index) => {
         isScrolling = true;
@@ -43,11 +40,17 @@ $(document).ready(function() {
         }, 1000, function() {
             isScrolling = false;
             currentSectionIndex = index;
-            console.log(currentSectionIndex)
-            console.log($(sections[index]).offset().top)
             setActiveSection(currentSectionIndex);
         });
+        setTimeout(function() {
+            if(index==0){
+                typingConte();
+            }else if(index==1){
+                fadeInEvent();
+            }
+        }, 1000);
     };
+
 
     // 초기 상태 설정
     setActiveSection(currentSectionIndex);
@@ -61,7 +64,7 @@ $(document).ready(function() {
     });
 
     // 휠 이벤트
-    $(window).on('wheel', function(event) {
+    $(document).on('wheel', function(event) {
         if (isScrolling) return;
         if (event.originalEvent.deltaY > 0) {
             if (currentSectionIndex < sections.length - 1) {
@@ -168,3 +171,32 @@ var swiper = new Swiper(".mySwiper", {
         prevEl: ".swiper-button-prev",
     },
 });
+// 타이핑 영역
+function typingConte() {
+    let content = "안녕하세요. \n 오수은 입니다.";
+    let text = document.querySelector(".typing_box .text");
+    let i = 0;
+    // 타이핑을 시작하는 함수
+    function typing() {
+        if (i < content.length) {
+            let txt = content.charAt(i);
+            text.innerHTML += txt === "\n" ? "<br/>" : txt;
+            i++;
+            return;
+        }
+        clearInterval(start); // 연속 타이핑 멈추기
+    }
+
+    // 내용을 지우고 타이핑
+    function startTyping() {
+        text.innerHTML = ""; // 내용 초기화
+        i = 0; // 인덱스 초기화
+        start = setInterval(typing, 180); // 타이핑 시작
+    }
+
+    // 타이핑 시작
+    startTyping();
+}
+typingConte();
+
+// 타이핑 영역 끝

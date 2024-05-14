@@ -208,7 +208,19 @@ header.scroll+.wrap #section1 .content {
     position:relative;
 }
 .profile li.name {
-    font-size:0.9em
+    font-size:0.9em;
+    line-height: 1.4em;
+}
+.typing_box{height: 90px}
+.blink {
+    animation: blink 0.8s both infinite ;
+    border-right:1px solid #000
+}
+@keyframes blink {
+    50%{border-color: transparent;}
+}
+.profile li.name+.name{
+    margin-bottom: 10px;
 }
 #section1 .bg01 {
     text-align:center;
@@ -243,7 +255,6 @@ header.scroll+.wrap #section1 .content {
     line-height:110px;
     font-size:15px;
     transform:translate(-50%,-50%);
-//가운데 위
 }
 .dark-mode .chart span.center {
     background-color:#000;
@@ -481,6 +492,7 @@ footer {
     .left-cont .bg01 {
         display:none;
     }
+    .typing_box{height: 65px;}
     .profile {
         width:600px;
         text-align:center;
@@ -492,7 +504,7 @@ footer {
         line-height:2em;
     }
     .profile li.name {
-        font-size:0.8em
+        font-size:0.8em;
     }
     .info {
         width:260px;
