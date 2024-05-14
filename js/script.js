@@ -43,6 +43,8 @@ $(document).ready(function() {
         }, 1000, function() {
             isScrolling = false;
             currentSectionIndex = index;
+            console.log(currentSectionIndex)
+            console.log($(sections[index]).offset().top)
             setActiveSection(currentSectionIndex);
         });
     };
@@ -93,12 +95,38 @@ $(document).ready(function() {
                 return;
         }
     });
+
+    // 터치 스크롤 이벤트
+    let startY = 0;
+    $(document).on('touchstart', function(event) {
+        startY = event.touches[0].clientY;
+    });
+
+    $(document).on('touchmove', function(event) {
+        if (isScrolling) return;
+        let endY = event.touches[0].clientY;
+        let deltaY = startY - endY;
+        if (deltaY > 50) {
+            if (currentSectionIndex < sections.length - 1) {
+                scrollToSection(currentSectionIndex + 1);
+            }
+            $('header').addClass('scroll');
+        } else if (deltaY < -50) {
+            if (currentSectionIndex > 0) {
+                scrollToSection(currentSectionIndex - 1);
+            } else {
+                $('header').removeClass('scroll');
+            }
+        }
+    });
+
     // 상단 네비 버튼 클릭
     $('nav .button').click(function (){
         $('nav ul').children('li').toggleClass('active');
     });
 
 });
+
 // 차트구현
 const chart1 = document.querySelector('.doughnut1');
 const chart2 = document.querySelector('.doughnut2');
