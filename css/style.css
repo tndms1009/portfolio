@@ -151,17 +151,26 @@ nav .button {
 .gray {
     color:#888
 }
-#section1 .line-txt:before {
-    content:'';
-    display:block;
-    width:97%;
-    position:absolute;
-    background-color:#eaacac;
-    height:10px;
-    left:10px;
-    top:57%;
+#section1 .line-txt span{
+    display: inline-block;
 }
-.dark-mode #section1 .line-txt:before {
+#section1 .line-txt span:after {
+    display: block;
+    width: 0px;
+    height: 15px;
+    left: 10px;
+    content: '';
+    background-color: #CBC0F9;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: width 0.8s;
+    margin-top: -19px;
+    transition-delay: 1s;
+}
+#section1.fade-in .line-txt span:after {
+    width:97%;
+}
+.dark-mode #section1 .line-txt span:after {
     background-color:#413b87;
 }
 #section1 .line-txt span {
@@ -186,7 +195,6 @@ section {
     font-size:2em;
     line-height:1.2em;
     transition:transform 1s ease;
-    border-bottom:1px solid #000;
     opacity:0;
 }
 .dark-mode section {
@@ -216,6 +224,7 @@ header.scroll+.wrap #section1 .content {
     animation: blink 0.8s both infinite ;
     border-right:1px solid #000
 }
+.dark-mode .blink {border-right:1px solid #fff}
 @keyframes blink {
     50%{border-color: transparent;}
 }
@@ -437,7 +446,9 @@ footer {
     padding:50px 0;
     text-align:center;
     font-size:1em;
+    border-top: 1px solid #000;
 }
+.dark-mode footer {border-top: 1px solid #fff;}
 @media screen and (max-width:1024px) {
     .content {
         width:90%;
@@ -493,6 +504,10 @@ footer {
         display:none;
     }
     .typing_box{height: 65px;}
+    #section1 .line-txt span:after{
+        margin: -12px 0 0 10px;
+        height: 10px;
+    }
     .profile {
         width:600px;
         text-align:center;
@@ -517,11 +532,6 @@ footer {
     }
     #section1 .left-cont {
         justify-content:space-between;
-    }
-    #section1 .line-txt:before {
-        width:32%;
-        left:36%;
-        top:57%;
     }
     #section2 .left-cont,#section2 .right-cont {
         width:50%;
@@ -564,10 +574,6 @@ footer {
         margin:0 auto;
         text-align:left;
         font-size:0.6em;
-    }
-    #section1 .line-txt:before {
-        left:10px;
-        width:184px;
     }
     #section2 .info {
         padding-left:10px;
