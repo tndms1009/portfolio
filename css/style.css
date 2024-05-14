@@ -156,15 +156,14 @@ nav .button {
 }
 #section1 .line-txt span:after {
     display: block;
-    width: 0px;
+    width: 0;
     height: 15px;
-    left: 10px;
     content: '';
     background-color: #CBC0F9;
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: width 0.8s;
-    margin-top: -19px;
+    margin: -19px 0 0 10px;
     transition-delay: 1s;
 }
 #section1.fade-in .line-txt span:after {
